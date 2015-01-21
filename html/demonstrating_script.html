@@ -1,0 +1,713 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>demonstrating_script</title><meta name="generator" content="MATLAB 8.2"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2014-02-03"><meta name="DC.source" content="demonstrating_script.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, tt, code { font-size:12px; }
+pre { margin:0px 0px 20px; }
+pre.error { color:red; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h2>Contents</h2><div><ul><li><a href="#1">one</a></li><li><a href="#2">two</a></li><li><a href="#3">three</a></li><li><a href="#4">four</a></li><li><a href="#5">five</a></li><li><a href="#6">six</a></li><li><a href="#7">seven</a></li><li><a href="#8">eight</a></li><li><a href="#9">nine</a></li><li><a href="#10">ten</a></li><li><a href="#11">eleven</a></li><li><a href="#12">twelve</a></li><li><a href="#13">thirteen</a></li><li><a href="#14">fourteen</a></li></ul></div><h2>one<a name="1"></a></h2><pre>j&#8217;ai r&eacute;ussi &agrave; estimer un taux de transformation (nombre achats/nombre de visites)
+avec une pr&eacute;cision de 1%  &agrave; l&#8217;aide de 15 000 visites.
+De combien de visites ai-je besoin pour avoir une pr&eacute;cision dix fois sup&eacute;rieure,
+&agrave; savoir 0,1%  (1 pour mille)
+R&eacute;ponse :
+Let's say that each visit Xi follows an independent law which
+yields success with probability p (the conversion rate to estimate)
+In probability theory, the central limit theorem (CLT) states that, given certain conditions,
+the arithmetic mean of a sufficiently large number of iterates of independent random variables,
+each with a well-defined expected value and well-defined variance, will be approximately normally distributed.
+That is, suppose that a sample is obtained containing a large number of observations,
+each observation being randomly generated in a way that does not depend on the values of the other observations,
+and that the arithmetic average of the observed values is computed.
+If this procedure is performed many times, the central limit theorem says
+that the computed values of the average will be distributed according to the normal distribution
+On cherche &agrave; estimer le pourcentage de personnes ayant achet&eacute; / ayant visit&eacute;.
+Pour cela on effectue un sondage. Comme on ne sonde pas toute la population
+on ne va pas tomber exactement sur la bonne valeur mais de faire une erreur.
+On veut alors donner un intervalle qui a 99 %  de chances de contenir la vraie valeur.
+on sait qu'un sondage sur 15 000 personnes donne un intervale de
+confiance de 1%
+On appelle p la &laquo; vraie &raquo; proportion de personnes dans la population totale qui ont achet&eacute;.
+On cherche &agrave; estimer p. On appelle N le nombre de personnes ayant &eacute;t&eacute; sond&eacute;es, ici N=15 000.
+On appelle S le nombre de personnes ayant achet&eacute; parmi les N personnes ayant visit&eacute;.
+L&#8217;id&eacute;e est de pr&eacute;senter comme estimation de p la valeur $$ \frac{S}{N}$$ (loi
+des grands nombres).
+On applique le th&eacute;or&egrave;me central limite &agrave; la variable al&eacute;atoire X_i
+qui vaut 1 si la i-&egrave;me personne visitante a achet&eacute; et 0 sinon.
+Cette variable a une moyenne p et une variance p(1-p). Alors:
+D'apr&egrave;s le th&eacute;or&egrave;me central limite,</pre><p><img src="demonstrating_script_eq25442.png" alt="$$\frac{S-Np}{\sqrt{Np(1-p)}}$$"></p><pre>tend vers une loi normale de moyenne 0 et de variance 1
+(lorsque S = X_1 + ... + X_N et N est assez grand).
+ou encore</pre><pre>tend vers une loi normale de moyenne 0 et de variance 1
+5%  quantile for the canonic gaussian = 1,96</pre><p><img src="demonstrating_script_eq70539.png" alt="$$ P\left(-1,96<\frac{S/N-p}{\sqrt{p(1-p)/N}}<1,96\right) \approx 0,95$$"></p><pre>1%  quantile for the canonic gaussian = 2.5758</pre><p><img src="demonstrating_script_eq39278.png" alt="$$P\left(-2.3263<\frac{S/N-p}{\sqrt{p(1-p)/N}}<2.5758\right) \approx 0,99$$"></p><pre>soit encore</pre><p><img src="demonstrating_script_eq93574.png" alt="$$P\left(\frac SN-2.3263\sqrt{p(1-p)/N}<p<\frac SN + 2.3263\sqrt{p(1-p)/N}\right)\approx 0,99$$"></p><p><img src="demonstrating_script_eq39302.png" alt="$$+-2.3263\sqrt{p(1-p)/N}$">$ donne 1%  de precision</p><pre>0.1%  quantile for the canonic gaussian = 2.5758</pre><pre>$$P\left(-3.2905&lt;\frac{S/N-p}{\sqrt{p(1-p)/N}}&lt;3.2905\right) \approx 0,999$$</pre><pre>soit encore</pre><p><img src="demonstrating_script_eq18985.png" alt="$$P\left(\frac SN-3.2905\sqrt{p(1-p)/N}<p<\frac SN + 3.2905\sqrt{p(1-p)/N}\right)\approx 0,999$$"></p><pre>N=15000 =&gt; 1%  precision
+from all those computations we derive our sample size to get to 0.1%</pre><pre>constante* (nb std(1%))/sqrt(N) =1%</pre><p>constante * 3.2905 /sqrt(N) =0.1%</p><pre class="codeinput">x = norminv([0.025 0.975],0,1)
+x = norminv([0.005 0.995],0,1)
+x = norminv([0.0005 0.9995],0,1)
+constante= 0.01/(2.3263/sqrt(15000));
+N=(constante* 3.2905/0.001)^2
+
+<span class="comment">% pour am&eacute;liorer du pourcent au dizi&egrave;me de pourcent, il faut augmenter</span>
+<span class="comment">% l'&eacute;chantillon de dizaine de milliers &agrave; des millions</span>
+</pre><pre class="codeoutput">
+x =
+
+   -1.9600    1.9600
+
+
+x =
+
+   -2.5758    2.5758
+
+
+x =
+
+   -3.2905    3.2905
+
+
+N =
+
+   3.0011e+06
+
+</pre><h2>two<a name="2"></a></h2><pre>Un tirage AB (probabilit&eacute; d&#8217;&ecirc;tre dans le groupe test est &eacute;gale &agrave; 0.5)
+est r&eacute;alis&eacute; pour un &eacute;chantillon de taille 1 million.
+Le pourcentage observ&eacute; d&#8217;individus dans la population test est de 48
+Est-ce normal ?
+I would say no :
+in standard cross-validation :
+In k-fold cross-validation, the original sample is randomly partitioned into k equal size subsamples.
+(this is usually implemented by shuffling the data array and then splitting it in k).
+Of the k subsamples, a single subsample is retained as the validation data for testing the model,
+and the remaining k ? 1 subsamples are used as training data.
+The cross-validation process is then repeated k times (the folds),
+with each of the k subsamples used exactly once as the validation data.
+The k results from the folds can then be averaged (or otherwise combined) to produce a single estimation.
+The advantage of this method over repeated random sub-sampling is that
+all observations are used for both training and validation,
+and each observation is used for validation exactly once.
+10-fold cross-validation is commonly used,[6] but in general k remains an unfixed parameter [1].
+2-fold cross-validation : This is the simplest variation of k-fold cross-validation.
+Also, called holdout method. For each fold, we randomly assign data points to two sets d0 and d1,
+so that both sets are equal size (this is usually implemented by shuffling the data array and then splitting it in two).
+We then train on d0 and test on d1, followed by training on d1 and testing on d0.
+This has the advantage that our training and test sets are both large,
+and each data point is used for both training and validation on each fold
+the hypergeometric distribution is a discrete probability distribution
+that describes the probability of k successes in n draws
+without replacement from a finite population of size N containing exactly K successes.
+This is in contrast to the binomial distribution, which describes the probability of k successes in n draws with replacement.
+the binomial distribution is the discrete probability distribution
+of the number of successes in a sequence of n independent yes/no experiments,
+each of which yields success with probability p
+but why not ?
+for each element of our sample, we use a binomial law to predict its
+group
+but why not</pre><pre class="codeinput">c = cvpartition(100,<span class="string">'kfold'</span>,2)
+cnew = repartition(c)
+
+c = cvpartition(100,<span class="string">'kfold'</span>,3)
+cnew = repartition(c)
+<span class="comment">%  but if we draw with replacement ( we approximate the hypergeometric</span>
+<span class="comment">%  distribution with a binomial distribution )</span>
+pd = makedist(<span class="string">'Binomial'</span>,<span class="string">'N'</span>,100,<span class="string">'p'</span>,0.5)
+r = random(pd,[100,1]);
+mean(r)
+<span class="comment">%  the proportion are no more 50/50</span>
+</pre><pre class="codeoutput">
+c = 
+
+K-fold cross validation partition
+             N: 100
+   NumTestSets: 2
+     TrainSize: 50  50
+      TestSize: 50  50
+
+cnew = 
+
+K-fold cross validation partition
+             N: 100
+   NumTestSets: 2
+     TrainSize: 50  50
+      TestSize: 50  50
+
+c = 
+
+K-fold cross validation partition
+             N: 100
+   NumTestSets: 3
+     TrainSize: 67  66  67
+      TestSize: 33  34  33
+
+cnew = 
+
+K-fold cross validation partition
+             N: 100
+   NumTestSets: 3
+     TrainSize: 67  66  67
+      TestSize: 33  34  33
+
+pd = 
+
+  BinomialDistribution
+
+  Binomial distribution
+    N = 100
+    p = 0.5
+
+
+ans =
+
+   50.1000
+
+</pre><h2>three<a name="3"></a></h2><pre>j&#8217;ai test&eacute; le taux de transformation sur deux versions du site lors d&#8217;un test AB (test randomis&eacute;).
+J&#8217;obtiens les r&eacute;sultats suivants :
+Groupe Contr&ocirc;le	Groupe Test
+Taille Groupe	117415	117284
+Taux de transformation observ&eacute;	7,07%	9,36%
+Quel est l&#8217;intervalle de confiance du gain incr&eacute;mental (Taux de transformation TEST &#8211; Taux de transformation CONTROLE) ?
+on suppose donc que chaque groupe suit une loi de param&egrave;tre p diff&eacute;rent
+la premiere chose &agrave; faire est de tester les deux distributions non
+normales pour s'assurer qu'elles sont bien diff&eacute;rentes
+Wilcoxon rank sum test ou % p = ranksum(x,y)  The p-value  indicates if  ranksum rejects or not the null hypothesis of equal medians at the default 5% significance level.
+p&lt;0.05 : on rejete l'hypothes nulle : pas meme mediane
+2-sample Kolmogorov-Smirnov test
+h = kstest2(x1,x2) The returned value of h = 1 indicates that kstest rejects the null hypothesis at the default 5% significance level.
+Ensuite, avec les m&ecirc;mes hypoth&egrave;ses que dans la question un, on peut d&eacute;duire du th&eacute;or&egrave;me central limite :
+D'apr&egrave;s le th&eacute;or&egrave;me central limite,</pre><p><img src="demonstrating_script_eq25442.png" alt="$$\frac{S-Np}{\sqrt{Np(1-p)}}$$"></p><pre>tend vers une loi normale de moyenne 0 et de variance 1
+on en d&eacute;duit deux intervalles de confiance
+En estimant</pre><p><img src="demonstrating_script_eq30120.png" alt="$$\sqrt{p(1-p)} par \sqrt{(S/N)(1-(S/N))}$$"></p><p>on peut alors encadrer p:</p><p><img src="demonstrating_script_eq42621.png" alt="$$P\left(\frac{S}{N}-1,96\sqrt{\frac{(S/N)(1-(S/N))}{N}}<p<\frac{S}{N}+1,96\sqrt{\frac{(S/N)(1-(S/N))}{N}}\ \right) \approx 0,95$$"></p><p>les deux intervalles de confiance se somment : en effet la somme de deux gaussiennes est une gaussienne</p><p><img src="demonstrating_script_eq10076.png" alt="$$\scriptstyle X_1\sim \mathcal N(\mu_1,\sigma_1^2), \scriptstyle X_2\sim \mathcal N(\mu_2,\sigma_2^2) et \scriptstyle X_1 et \scriptstyle X_2$$"></p><p>sont ind&eacute;pendantes, alors la variable al&eacute;atoire</p><p><img src="demonstrating_script_eq14651.png" alt="$$\scriptstyle X_1+X_2 suit la loi normale \scriptstyle \mathcal N(\mu_1 + \mu_2, \sigma_1^2 + \sigma_2^2)$$"></p><p>on peut alors encadrer p2-p1:</p><p><img src="demonstrating_script_eq10113.png" alt="$$P\left(\frac{S_2}{N_2}-\frac{S_1}{N_1}-1,96\sqrt{\frac{(S_1/N_1)(1-(S_1/N_1))}{N_1}+\frac{(S_2/N_2)(1-(S_2/N_2))}{N_2}}<p_2-p_1<\frac{S_2}{N_2}-\frac{S_1}{N_1}+1,96\sqrt{\frac{(S_1/N_1)(1-(S_1/N_1))}{N_1}+\frac{(S_2/N_2)(1-(S_2/N_2))}{N_2}}\ \right) \approx 0,95$$"></p><p>numeriquement l'intervalle  &agrave; 5% donne :</p><pre class="codeinput">demi_intervalle=1.96*sqrt( 0.0707.*(1-0.0707)./117415 +0.0936.*(1-0.0936)./117284 )
+</pre><pre class="codeoutput">
+demi_intervalle =
+
+    0.0022
+
+</pre><h2>four<a name="4"></a></h2><pre>Quels seraient, selon vous, les facteurs de saisonnalit&eacute; du Chiffre d&#8217;Affaires de cDiscount ?
+les grandes phases de d&eacute;penses
+La p&eacute;riode paroxystique de l'e-commerce est No&euml;l
+No&euml;l est un acc&eacute;l&eacute;rateur pour le secteur, mais aussi un facteur d&eacute;clencheur,
+puisque la p&eacute;riode apporte un fort contingent de primoacheteurs.
+le deuxi&egrave;me p&eacute;riode de ventes la plus importante reste li&eacute;e aux soldes,
+puisqu'il s'agit des mois de juin et juillet.
+En plus des soldes, nos ventes augmentent sur plusieurs cat&eacute;gories de produits dot&eacute;es d'une saisonnalit&eacute; commerciale
+influence des saisonnalit&eacute;s propres des produits vendus (barbecue premier
+week end chaud).
+In recent years, Tesco has used MATLAB to automatically predict how promotions and British weather affect product food sales in its 2,400 UK stores. In this session, Duncan will present some of the most recent innovations from the supply chain development department. In particular, the team has improved promotional forecasting and price optimisation of the reduced to clear process. Furthermore, simulation and analysis of the supply chain has provided more accurate demand forecasts and led to improved supplier agreements. Tens of millions of pounds have been saved through these changes</pre><h2>five<a name="5"></a></h2><pre>Comment d&eacute;saisonnaliseriez-vous cette s&eacute;rie
+TRAMO-SEATS ou X12 arima pour la correction des variations saisonni&egrave;res des indicateurs de court term
+ou sarima methodology</pre><h2>six<a name="6"></a></h2><pre>Mon taux de croissance de CA est de 15%.
+Comment pouvez-vous l&#8217;expliquer ?
+l'e-commerce suit la tendance g&eacute;n&eacute;rale de l'internet : grosse croissance
+les nouveaux terminaux, la s&eacute;curit&eacute; garantie,
+les r&eacute;seaux sociaux,
+tout concourt &agrave; l'e-commerce et au marketing web</pre><h2>seven<a name="7"></a></h2><pre>Toutes les semaines, il y a une probabilit&eacute; de 10%  d&#8217;avoir une baisse du CA.
+Quelle est la fr&eacute;quence de l&#8217;&eacute;v&egrave;nement  quatre semaines de baisse ?
+en supposant les variables iid :</pre><pre class="codeinput">proba=(0.1)^4
+</pre><pre class="codeoutput">
+proba =
+
+   1.0000e-04
+
+</pre><h2>eight<a name="8"></a></h2><pre>j&#8217;ach&egrave;te sur une place de march&eacute; des visites.
+Le segment &laquo; hommes &raquo; ach&egrave;te avec une probabilit&eacute; de 5%,
+le segment &laquo; femmes &raquo; avec une probabilit&eacute; de 2%.
+Sachant que je paye l&#8217;acquisition de 100 visites hommes 50 euros,
+quel est le prix pour l&#8217;acquisition de 100 visites &laquo; femmes &raquo; ?</pre><h2>nine<a name="9"></a></h2><pre>calculez les coefficients de la r&eacute;gression lin&eacute;aire de la variable y sur les variables x
+et la constante pour les individus dont la variable r&eacute;ponse vaut Y.
+Fichier regression.csv.Joindre le programme</pre><pre class="codeinput"> [y,x,reponse] = importfile1(<span class="string">'regression.csv'</span>);
+ <span class="comment">% we build the predictor matrix</span>
+ A=[ones(size(x)),x];
+ beta=A\y;
+ plot([y,A*beta])
+ residus=y-A*beta;
+ <span class="comment">% les residus n'ont pas forc&eacute;ment une structure de bruit blanc</span>
+ plot(residus);
+ <span class="comment">% l'histogramme des r&eacute;sidus</span>
+ hist(residus,30);
+</pre><img vspace="5" hspace="5" src="demonstrating_script_01.png" alt=""> <h2>ten<a name="10"></a></h2><pre>le taux de transformation p2 est-il significativement sup&eacute;rieur au taux de transformation p1.
+Si oui, avec quelle fiabilit&eacute; ? Fichier testmoyenne.csv. Joindre le programme</pre><pre class="codeinput">[p1,p2] = importfile(<span class="string">'testmoyenne.csv'</span>);
+<span class="comment">%0.7750</span>
+rate1=sum(p1)./length(p1)
+<span class="comment">%0.5110</span>
+rate2=sum(p2)./length(p2)
+<span class="comment">% Hypothesis testing pour d&eacute;terminer si les deux distributions sont</span>
+<span class="comment">% identiques</span>
+<span class="comment">%  Wilcoxon rank sum test ou % p = ranksum(x,y)  The p-value  indicates if  ranksum rejects or not the null hypothesis of equal medians at the default 5% significance level.</span>
+p = ranksum(p1,p2)
+<span class="comment">%  p&lt;0.05 : on rejete l'hypothes nulle : pas meme mediane</span>
+<span class="comment">%  2-sample Kolmogorov-Smirnov test</span>
+<span class="comment">%  h = kstest2(x1,x2) The returned value of h = 1 indicates that kstest rejects the null hypothesis at the default 5% significance level.</span>
+ h = kstest2(p1,p2)
+ <span class="comment">% h=1 we reject the null hypothesis of the same distribution</span>
+</pre><pre class="codeoutput">
+rate1 =
+
+    0.7750
+
+
+rate2 =
+
+    0.5110
+
+
+p =
+
+   7.2498e-35
+
+
+h =
+
+     1
+
+</pre><h2>eleven<a name="11"></a></h2><pre>sur la page http://stat-computing.org/dataexpo/2009/the-data.html,
+vous trouverez des donn&eacute;es de transports a&eacute;riens.
+Calculez les coefficients de la r&eacute;gression lin&eacute;aire de la variable DepDelay sur les variables DayOfWeek,
+et heure de la semaine. Joindre le programme.</pre><pre class="codeinput">type <span class="string">big_regression</span>;
+load <span class="string">restricted_data</span>;
+DepTime=DepTime./1000;
+ A=double([ones(size(DayOfWeek)),DayOfWeek,DepTime]);
+ y=double(DepDelay);
+ clear <span class="string">DepDelay</span> <span class="string">DayOfWeek</span> <span class="string">DepTime</span>;
+ size(A)
+ beta=A\y
+
+ <span class="comment">%attention tres mauvais pouvoir predictif</span>
+<span class="comment">% en tout cas on s'aper&ccedil;oit clairement que le facteur prepoonderant est le</span>
+<span class="comment">% departure time :</span>
+<span class="comment">% plus on part tard dans la journee, plus on a de chance d</span>
+<span class="comment">% etre en retard</span>
+
+ <span class="comment">% penser a des choses non lin&eacute;aires : neural net, regression tree</span>
+<span class="comment">% penser regularisation ridge, lasso, elastic net</span>
+</pre><pre class="codeoutput">
+tic;
+f = fopen('2008.csv');
+%     C = textscan(f, '%d %d %d %d %d %d %d %d %s %d %s %d %d %d %d %d %*[^\n]', 100, 'Delimiter', ',', ...
+%         'HeaderLines', 1, 'TreatAsEmpty', 'NA');
+C = textscan(f, '%d %d %d %d %d %d %d %d %s %d %s %d %d %d %d %d %*[^\n]', 'Delimiter', ',', ...
+    'HeaderLines', 1, 'TreatAsEmpty', 'NA');
+%*[^\n]'
+[~, ~, ~, DayOfWeek, DepTime, ~,~,~,~,~,~,~,~,~,~,DepDelay] = C{:};
+fclose(f);
+toc;
+clear C;
+save('restricted_data.mat');
+
+ans =
+
+     7009728           3
+
+
+beta =
+
+   -5.4261
+    0.2681
+   10.3185
+
+</pre><h2>twelve<a name="12"></a></h2><pre>dans le graphe du site cdiscount.com,
+calculez le degr&eacute; moyen sortant et entrant des pages (moyenne du nombre liens entrant la page, respectivement  sortant).
+Donnez les 10 premiers couples de pages dans la distance est maximum, et donnez cette distance. Joindre le programme.</pre><pre class="codeinput"><span class="comment">% plutot que recoder la roue : prendre en main l'api python panda ( still</span>
+<span class="comment">% to do)</span>
+<span class="comment">% http://www.dataiku.com/blog/2012/12/07/visualizing-your-linkedin-graph-using-gephi-part-1.html</span>
+<span class="comment">% http://www.dataiku.com/blog/2012/12/07/visualizing-your-linkedin-graph-using-gephi-part-2.html</span>
+</pre><h2>thirteen<a name="13"></a></h2><pre>une m&eacute;thode classique de recommandation est la technique dite de filtrage collaboratif.
+Il consiste &agrave; proposer &agrave; un client i les produits achet&eacute;s par les clients ayant achet&eacute;s.</pre><pre class="codeinput"><span class="comment">%Les produits recommand&eacute;s sont class&eacute;s par fr&eacute;quence d&#8217;apparition.</span>
+<span class="comment">%  Proposez un algorithme et donner sa complexit&eacute; ? Votre algorithme est-il parall&eacute;lisable ? Si non, comment faire ?</span>
+
+<span class="comment">% mon_nouveau_client</span>
+<span class="comment">% mon_nouvel_achat_par_mon_nouveau_client</span>
+<span class="comment">% pour chaque client(i)</span>
+<span class="comment">%   si mon_nouvel_achat_par_mon_nouveau_client est dans les produits achet&eacute;s par le client(i)</span>
+<span class="comment">%       alors comptabiliser les produits achet&eacute;s par le client (les mettre</span>
+<span class="comment">%       dans une hashmap par key, la value &eacute;tant &eacute;tant incr&eacute;ment&eacute; de 1 &agrave;</span>
+<span class="comment">%       chaque fois)</span>
+<span class="comment">%   end</span>
+<span class="comment">%end</span>
+
+<span class="comment">% oui l'algorithme est parall&eacute;lisable : &agrave; condition d'avoir une hashmap</span>
+<span class="comment">% threadsafe : partag&eacute; par plusieurs threads qui parcourent chacun un paquet de client</span>
+<span class="comment">% il faut juste que cette hash map g&egrave;re les acc&egrave;s concurrentiels (facile en</span>
+<span class="comment">% java)</span>
+<span class="comment">% sinon c'est possible &eacute;galement, il faut merger les donn&eacute;es &agrave; la fin.</span>
+</pre><h2>fourteen<a name="14"></a></h2><p>quelles pistes d&#8217;am&eacute;lioration proposeriez-vous pour am&eacute;liorer la personnalisation/recommandation sur cdiscount.com ?</p><pre class="codeinput"><span class="comment">% publicit&eacute; cibl&eacute;e au maximum (bonne personne, bon moment, bon produit)</span>
+<span class="comment">% profil construit &agrave; partir des pages visit&eacute;es (clustering pour d&eacute;finir</span>
+<span class="comment">% type d'utilisateur</span>
+<span class="comment">% prise en compte de facteurs ext&eacute;rieurs : temps m&eacute;t&eacute;o, tendance,</span>
+<span class="comment">% effet de r&eacute;seaux sociaux : j'ach&egrave;te la m&ecirc;me chose que dans mon r&eacute;seau</span>
+<span class="comment">% analyse de cookies en g&eacute;n&eacute;ral pas seulement cdiscount (si il prend beaucoup l'avion, il peut vouloir acheter un coussin repose t&ecirc;te)</span>
+<span class="comment">%</span>
+</pre><p class="footer"><br><a href="http://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2013b</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%%  one
+%  j’ai réussi à estimer un taux de transformation (nombre achats/nombre de visites)
+%  avec une précision de 1%  à l’aide de 15 000 visites. 
+%  De combien de visites ai-je besoin pour avoir une précision dix fois supérieure, 
+%  à savoir 0,1%  (1 pour mille)
+%  Réponse :
+%  Let's say that each visit Xi follows an independent law which
+%  yields success with probability p (the conversion rate to estimate)
+%  In probability theory, the central limit theorem (CLT) states that, given certain conditions, 
+%  the arithmetic mean of a sufficiently large number of iterates of independent random variables,
+%  each with a well-defined expected value and well-defined variance, will be approximately normally distributed.
+%  That is, suppose that a sample is obtained containing a large number of observations, 
+%  each observation being randomly generated in a way that does not depend on the values of the other observations, 
+%  and that the arithmetic average of the observed values is computed.
+%  If this procedure is performed many times, the central limit theorem says 
+%  that the computed values of the average will be distributed according to the normal distribution
+%  On cherche à estimer le pourcentage de personnes ayant acheté / ayant visité.
+%  Pour cela on effectue un sondage. Comme on ne sonde pas toute la population
+%  on ne va pas tomber exactement sur la bonne valeur mais de faire une erreur. 
+%  On veut alors donner un intervalle qui a 99 %  de chances de contenir la vraie valeur.
+%  on sait qu'un sondage sur 15 000 personnes donne un intervale de
+%  confiance de 1%
+%  On appelle p la « vraie » proportion de personnes dans la population totale qui ont acheté.
+%  On cherche à estimer p. On appelle N le nombre de personnes ayant été sondées, ici N=15 000.
+%  On appelle S le nombre de personnes ayant acheté parmi les N personnes ayant visité. 
+%  L’idée est de présenter comme estimation de p la valeur $$ \frac{S}{N}$$ (loi
+%  des grands nombres).
+%  On applique le théorème central limite à la variable aléatoire X_i 
+%  qui vaut 1 si la i-ème personne visitante a acheté et 0 sinon. 
+%  Cette variable a une moyenne p et une variance p(1-p). Alors:
+%  D'après le théorème central limite, 
+% 
+% $$\frac{S-Np}{\sqrt{Np(1-p)}}$$
+% 
+%  tend vers une loi normale de moyenne 0 et de variance 1 
+%  (lorsque S = X_1 + ... + X_N et N est assez grand).
+% ou encore
+% 
+% 
+%  tend vers une loi normale de moyenne 0 et de variance 1 
+%  5%  quantile for the canonic gaussian = 1,96
+%
+% $$ P\left(-1,96<\frac{S/N-p}{\sqrt{p(1-p)/N}}<1,96\right) \approx 0,95$$
+%
+%  1%  quantile for the canonic gaussian = 2.5758
+%
+% $$P\left(-2.3263<\frac{S/N-p}{\sqrt{p(1-p)/N}}<2.5758\right) \approx 0,99$$
+%
+%  soit encore
+%
+% $$P\left(\frac SN-2.3263\sqrt{p(1-p)/N}<p<\frac SN + 2.3263\sqrt{p(1-p)/N}\right)\approx 0,99$$
+%
+% $$+-2.3263\sqrt{p(1-p)/N}$$ donne 1%  de precision
+%
+%  0.1%  quantile for the canonic gaussian = 2.5758
+%
+%  $$P\left(-3.2905<\frac{S/N-p}{\sqrt{p(1-p)/N}}<3.2905\right) \approx 0,999$$
+%
+%  soit encore
+%
+% $$P\left(\frac SN-3.2905\sqrt{p(1-p)/N}<p<\frac SN + 3.2905\sqrt{p(1-p)/N}\right)\approx 0,999$$
+%
+%  N=15000 => 1%  precision
+%  from all those computations we derive our sample size to get to 0.1%
+%
+%  constante* (nb std(1%))/sqrt(N) =1%
+%
+% constante * 3.2905 /sqrt(N) =0.1%
+%
+
+x = norminv([0.025 0.975],0,1)
+x = norminv([0.005 0.995],0,1)
+x = norminv([0.0005 0.9995],0,1)
+constante= 0.01/(2.3263/sqrt(15000));
+N=(constante* 3.2905/0.001)^2
+
+% pour améliorer du pourcent au dizième de pourcent, il faut augmenter
+% l'échantillon de dizaine de milliers à des millions
+
+%%  two
+%  Un tirage AB (probabilité d’être dans le groupe test est égale à 0.5)
+%  est réalisé pour un échantillon de taille 1 million. 
+%  Le pourcentage observé d’individus dans la population test est de 48
+%  Est-ce normal ?
+%  I would say no :
+%  in standard cross-validation :
+%  In k-fold cross-validation, the original sample is randomly partitioned into k equal size subsamples.
+%  (this is usually implemented by shuffling the data array and then splitting it in k).
+%  Of the k subsamples, a single subsample is retained as the validation data for testing the model, 
+%  and the remaining k ? 1 subsamples are used as training data. 
+%  The cross-validation process is then repeated k times (the folds),
+%  with each of the k subsamples used exactly once as the validation data. 
+%  The k results from the folds can then be averaged (or otherwise combined) to produce a single estimation. 
+%  The advantage of this method over repeated random sub-sampling is that 
+%  all observations are used for both training and validation,
+%  and each observation is used for validation exactly once. 
+%  10-fold cross-validation is commonly used,[6] but in general k remains an unfixed parameter [1].
+%  2-fold cross-validation : This is the simplest variation of k-fold cross-validation.
+%  Also, called holdout method. For each fold, we randomly assign data points to two sets d0 and d1, 
+%  so that both sets are equal size (this is usually implemented by shuffling the data array and then splitting it in two). 
+%  We then train on d0 and test on d1, followed by training on d1 and testing on d0.
+%  This has the advantage that our training and test sets are both large, 
+%  and each data point is used for both training and validation on each fold
+%  the hypergeometric distribution is a discrete probability distribution 
+%  that describes the probability of k successes in n draws 
+%  without replacement from a finite population of size N containing exactly K successes.
+%  This is in contrast to the binomial distribution, which describes the probability of k successes in n draws with replacement.
+%  the binomial distribution is the discrete probability distribution
+%  of the number of successes in a sequence of n independent yes/no experiments, 
+%  each of which yields success with probability p
+%  but why not ?
+%  for each element of our sample, we use a binomial law to predict its
+%  group
+%  but why not
+
+c = cvpartition(100,'kfold',2)
+cnew = repartition(c)
+
+c = cvpartition(100,'kfold',3)
+cnew = repartition(c)
+%  but if we draw with replacement ( we approximate the hypergeometric
+%  distribution with a binomial distribution )
+pd = makedist('Binomial','N',100,'p',0.5)
+r = random(pd,[100,1]);
+mean(r)
+%  the proportion are no more 50/50
+
+%%  three
+%  j’ai testé le taux de transformation sur deux versions du site lors d’un test AB (test randomisé).
+%  J’obtiens les résultats suivants :
+%  Groupe Contrôle	Groupe Test
+%  Taille Groupe	117415	117284
+%  Taux de transformation observé	7,07%	9,36%
+%  Quel est l’intervalle de confiance du gain incrémental (Taux de transformation TEST – Taux de transformation CONTROLE) ?
+%  on suppose donc que chaque groupe suit une loi de paramètre p différent
+%  la premiere chose à faire est de tester les deux distributions non
+%  normales pour s'assurer qu'elles sont bien différentes
+%  Wilcoxon rank sum test ou % p = ranksum(x,y)  The p-value  indicates if  ranksum rejects or not the null hypothesis of equal medians at the default 5% significance level.
+%  p<0.05 : on rejete l'hypothes nulle : pas meme mediane
+%  2-sample Kolmogorov-Smirnov test
+%  h = kstest2(x1,x2) The returned value of h = 1 indicates that kstest rejects the null hypothesis at the default 5% significance level.
+%  Ensuite, avec les mêmes hypothèses que dans la question un, on peut déduire du théorème central limite :
+%  D'après le théorème central limite, 
+% 
+% 
+% $$\frac{S-Np}{\sqrt{Np(1-p)}}$$
+% 
+% 
+%  tend vers une loi normale de moyenne 0 et de variance 1 
+% on en déduit deux intervalles de confiance
+% En estimant
+% 
+% $$\sqrt{p(1-p)} par \sqrt{(S/N)(1-(S/N))}$$
+% 
+% on peut alors encadrer p:
+% 
+% $$P\left(\frac{S}{N}-1,96\sqrt{\frac{(S/N)(1-(S/N))}{N}}<p<\frac{S}{N}+1,96\sqrt{\frac{(S/N)(1-(S/N))}{N}}\ \right) \approx 0,95$$
+% 
+% les deux intervalles de confiance se somment :
+% en effet la somme de deux gaussiennes est une gaussienne 
+% 
+% $$\scriptstyle X_1\sim \mathcal N(\mu_1,\sigma_1^2), \scriptstyle X_2\sim \mathcal N(\mu_2,\sigma_2^2) et \scriptstyle X_1 et \scriptstyle X_2$$
+%
+% sont indépendantes, alors la variable aléatoire 
+%
+% $$\scriptstyle X_1+X_2 suit la loi normale \scriptstyle \mathcal N(\mu_1 + \mu_2, \sigma_1^2 + \sigma_2^2)$$
+% 
+%
+% on peut alors encadrer p2-p1:
+% 
+% $$P\left(\frac{S_2}{N_2}-\frac{S_1}{N_1}-1,96\sqrt{\frac{(S_1/N_1)(1-(S_1/N_1))}{N_1}+\frac{(S_2/N_2)(1-(S_2/N_2))}{N_2}}<p_2-p_1<\frac{S_2}{N_2}-\frac{S_1}{N_1}+1,96\sqrt{\frac{(S_1/N_1)(1-(S_1/N_1))}{N_1}+\frac{(S_2/N_2)(1-(S_2/N_2))}{N_2}}\ \right) \approx 0,95$$
+% 
+%
+% numeriquement l'intervalle  à 5% donne :
+demi_intervalle=1.96*sqrt( 0.0707.*(1-0.0707)./117415 +0.0936.*(1-0.0936)./117284 )
+
+%%  four
+%  Quels seraient, selon vous, les facteurs de saisonnalité du Chiffre d’Affaires de cDiscount ? 
+%  les grandes phases de dépenses
+%  La période paroxystique de l'e-commerce est Noël
+%  Noël est un accélérateur pour le secteur, mais aussi un facteur déclencheur,
+%  puisque la période apporte un fort contingent de primoacheteurs.
+%  le deuxième période de ventes la plus importante reste liée aux soldes,
+% puisqu'il s'agit des mois de juin et juillet.
+% En plus des soldes, nos ventes augmentent sur plusieurs catégories de produits dotées d'une saisonnalité commerciale
+% influence des saisonnalités propres des produits vendus (barbecue premier
+% week end chaud).
+% In recent years, Tesco has used MATLAB to automatically predict how promotions and British weather affect product food sales in its 2,400 UK stores. In this session, Duncan will present some of the most recent innovations from the supply chain development department. In particular, the team has improved promotional forecasting and price optimisation of the reduced to clear process. Furthermore, simulation and analysis of the supply chain has provided more accurate demand forecasts and led to improved supplier agreements. Tens of millions of pounds have been saved through these changes
+
+%%  five
+%  Comment désaisonnaliseriez-vous cette série
+% TRAMO-SEATS ou X12 arima pour la correction des variations saisonnières des indicateurs de court term
+% ou sarima methodology
+
+%%  six
+%  Mon taux de croissance de CA est de 15%. 
+%  Comment pouvez-vous l’expliquer ? 
+% l'e-commerce suit la tendance générale de l'internet : grosse croissance
+% les nouveaux terminaux, la sécurité garantie, 
+% les réseaux sociaux, 
+% tout concourt à l'e-commerce et au marketing web
+
+%%  seven
+%  Toutes les semaines, il y a une probabilité de 10%  d’avoir une baisse du CA.
+%  Quelle est la fréquence de l’évènement  quatre semaines de baisse ?
+% en supposant les variables iid :
+proba=(0.1)^4
+
+%%  eight
+%  j’achète sur une place de marché des visites.
+%  Le segment « hommes » achète avec une probabilité de 5%, 
+%  le segment « femmes » avec une probabilité de 2%. 
+%  Sachant que je paye l’acquisition de 100 visites hommes 50 euros, 
+%  quel est le prix pour l’acquisition de 100 visites « femmes » ?
+
+%%  nine 
+%  calculez les coefficients de la régression linéaire de la variable y sur les variables x 
+%  et la constante pour les individus dont la variable réponse vaut Y.
+%  Fichier regression.csv.Joindre le programme
+ [y,x,reponse] = importfile1('regression.csv');
+ % we build the predictor matrix
+ A=[ones(size(x)),x];
+ beta=A\y;
+ plot([y,A*beta])
+ residus=y-A*beta;
+ % les residus n'ont pas forcément une structure de bruit blanc
+ plot(residus);
+ % l'histogramme des résidus 
+ hist(residus,30);
+ 
+%%  ten
+%  le taux de transformation p2 est-il significativement supérieur au taux de transformation p1.
+%  Si oui, avec quelle fiabilité ? Fichier testmoyenne.csv. Joindre le programme
+[p1,p2] = importfile('testmoyenne.csv');
+%0.7750
+rate1=sum(p1)./length(p1)
+%0.5110
+rate2=sum(p2)./length(p2)
+% Hypothesis testing pour déterminer si les deux distributions sont
+% identiques
+%  Wilcoxon rank sum test ou % p = ranksum(x,y)  The p-value  indicates if  ranksum rejects or not the null hypothesis of equal medians at the default 5% significance level.
+p = ranksum(p1,p2)
+%  p<0.05 : on rejete l'hypothes nulle : pas meme mediane
+%  2-sample Kolmogorov-Smirnov test
+%  h = kstest2(x1,x2) The returned value of h = 1 indicates that kstest rejects the null hypothesis at the default 5% significance level.
+ h = kstest2(p1,p2)
+ % h=1 we reject the null hypothesis of the same distribution
+
+
+%%  eleven
+%  sur la page http://stat-computing.org/dataexpo/2009/the-data.html,
+%  vous trouverez des données de transports aériens. 
+%  Calculez les coefficients de la régression linéaire de la variable DepDelay sur les variables DayOfWeek, 
+%  et heure de la semaine. Joindre le programme.
+type big_regression;
+load restricted_data;
+DepTime=DepTime./1000;
+ A=double([ones(size(DayOfWeek)),DayOfWeek,DepTime]);
+ y=double(DepDelay);
+ clear DepDelay DayOfWeek DepTime;
+ size(A)
+ beta=A\y
+
+ %attention tres mauvais pouvoir predictif
+% en tout cas on s'aperçoit clairement que le facteur prepoonderant est le
+% departure time :
+% plus on part tard dans la journee, plus on a de chance d
+% etre en retard
+
+ % penser a des choses non linéaires : neural net, regression tree
+% penser regularisation ridge, lasso, elastic net
+ 
+%%  twelve
+%  dans le graphe du site cdiscount.com, 
+%  calculez le degré moyen sortant et entrant des pages (moyenne du nombre liens entrant la page, respectivement  sortant). 
+%  Donnez les 10 premiers couples de pages dans la distance est maximum, et donnez cette distance. Joindre le programme.
+
+% plutot que recoder la roue : prendre en main l'api python panda ( still
+% to do)
+% http://www.dataiku.com/blog/2012/12/07/visualizing-your-linkedin-graph-using-gephi-part-1.html
+% http://www.dataiku.com/blog/2012/12/07/visualizing-your-linkedin-graph-using-gephi-part-2.html
+
+%%  thirteen
+%  une méthode classique de recommandation est la technique dite de filtrage collaboratif.
+%  Il consiste à proposer à un client i les produits achetés par les clients ayant achetés.
+%Les produits recommandés sont classés par fréquence d’apparition. 
+%  Proposez un algorithme et donner sa complexité ? Votre algorithme est-il parallélisable ? Si non, comment faire ?
+
+% mon_nouveau_client
+% mon_nouvel_achat_par_mon_nouveau_client
+% pour chaque client(i) 
+%   si mon_nouvel_achat_par_mon_nouveau_client est dans les produits achetés par le client(i)
+%       alors comptabiliser les produits achetés par le client (les mettre
+%       dans une hashmap par key, la value étant étant incrémenté de 1 à
+%       chaque fois)
+%   end
+%end
+
+% oui l'algorithme est parallélisable : à condition d'avoir une hashmap
+% threadsafe : partagé par plusieurs threads qui parcourent chacun un paquet de client
+% il faut juste que cette hash map gère les accès concurrentiels (facile en
+% java)
+% sinon c'est possible également, il faut merger les données à la fin.
+
+%%  fourteen
+% quelles pistes d’amélioration proposeriez-vous pour améliorer la personnalisation/recommandation sur cdiscount.com ? 
+
+% publicité ciblée au maximum (bonne personne, bon moment, bon produit)
+% profil construit à partir des pages visitées (clustering pour définir
+% type d'utilisateur 
+% prise en compte de facteurs extérieurs : temps météo, tendance, 
+% effet de réseaux sociaux : j'achète la même chose que dans mon réseau
+% analyse de cookies en général pas seulement cdiscount (si il prend beaucoup l'avion, il peut vouloir acheter un coussin repose tête)
+%
+
+
+##### SOURCE END #####
+--></body></html>
