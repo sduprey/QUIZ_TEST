@@ -1,0 +1,39 @@
+Enigma 1 :You face three doors. Only one has money behind. After you chose a door, a genius appears, opens one empty door from the two you did not choose and ask you  if you would rather change with the other remaining door you did not choose.
+
+Solution
+Win = event of winning in the end
+Loss = event of winning in the end
+Win^b = event of winning at the beginning
+Loss^b = event of loss at the beginning
+
+Bayes theorem in case we choose to change :
+P(Win) = P(Win | Loss^b)*P(Loss^b) + P(Win | Win^b)*P(Win^b)
+P(Win) = 1 * 2/3 + 0 * 1/3 = 2/3
+
+Bayes theorem in case we choose not to change :
+P(Win) = P(Win | Loss^b)*P(Loss^b) + P(Win | Win^b)*P(Win^b)
+P(Win) = 1/3
+
+
+Enigma 2 : a spaghetti falls and breaks into three parts.(The breaks occur with a uniform probability over the spaghetti). What is the probability of being able to build a triangle
+
+Solution 1:
+It seems natural to rephrase the question in terms of barycentric coordinates in a triangle. These coordinates are numbers x, y, z in the interval [0,1] satisfying the equation x+y+z=1. We are looking for triples (x,y,z) of such numbers satisfying the three triangle inequalities x≤y+z, y≤x+z, and z≤x+y. Replacing the relations "≤" by "=", we get line segments joining the midpoints of the edges of the triangle. These line segments cut the triangle into four congruent subtriangles. The central one of these four subtriangles is the region where all three triangle inequalities hold, and this region has area equal to one quarter of the area of the big triangle.
+
+Solution 2:
+Without loss of generality assume that i) the stick is the [0,1] interval, ii) and the first breaking point x is chosen uniformly randomly in [0,0.5]. Now for each x the next point y should be in [0.5,x+0.5] to guarantee the triangle. The probability of such choice is x. Then one can apply Bayes with f(x)=2 and f(y|x)=x:
+Pr{Triangle Making}=sum_{0}^{0.5}2xdx=1/4
+
+Enigma 3 : 
+given 20 "destructable" light bulbs(which breaks at certain   height), and a building with 100 floors, how do you determine the height that the light bulb breaks. 
+Solution : (this the algorithm used to find elements in a filtered array list)
+Start at half way point and keep going up or down to the next halfway point until you determine the height. You should be able to determine the floor within 7 bulbs or fewer and  assuming each floor is 10 feet high, you should be able to determine the exact height in feet within another 5 bulbs or fewer. The greatest number of bulbs you could break to reach the answer would be 12, plus the one for the initial test = 13 total.
+
+Enigma 4 :A rope burns in 1 hour. How do you measure 1/2 hour, 1/4 hour? Beware the rope comsumption is inhomogeneous in time
+Solution for 1/2 hour : You light each side. 1/2 an hour is when the two bunring points meet.
+Solution for 1/4 hour : You light each side and the middle.It splits the rope into two bunrning pieces. Each time a side is completely burnt. You lighten the very middle of the other burning piece.
+
+Enigma 5: how many cube of size 1 are visible in a cube of size n built from those small units.
+Solution : n^3-(n-2)^3
+
+Enigma 6 : You are faced with two doors. One door leads to your job offer (that’s the one you want!), and the other leads to the exit. In front of each door is a guard. One guard always tells the truth. The other always lies. You can ask one question to decide which door is the correct one. What will you ask?
